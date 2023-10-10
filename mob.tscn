@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2gfyxmxbat15"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_7bpxd"]
+[ext_resource type="Texture2D" uid="uid://bc8p14qkw0mwr" path="res://sprites/enemy.png" id="1_ow60y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8lus"]
+radius = 43.0465
+
+[node name="Mob" type="RigidBody2D"]
+position = Vector2(326, 264)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_7bpxd")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_ow60y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t8lus")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
