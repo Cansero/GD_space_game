@@ -1,12 +1,17 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var meteor_scene: PackedScene
+
 
 func new_game():
 	$MobTimer.start()
+	$MeteorTimer.start()
+	
 
 func _ready():
 	new_game()
+
 
 func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
@@ -23,3 +28,25 @@ func _on_mob_timer_timeout():
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
+
+
+func _on_meteor_timer_timeout():
+	var enemies = get_tree().get_nodes_in_group("meteor")
+	enemies = enemies.size()
+	if enemies < 5:
+		var meteor = meteor_scene.instantiate()
+		
+		var meteor_spawn_location = get_node("MobPath/MobLocation")
+		meteor_spawn_location.progress_ratio = randf()
+		
+		var direction = meteor_spawn_location.rotation + PI / 2
+		
+		meteor.position = meteor_spawn_location.position
+		meteor.rotation = direction
+		
+		var velocity = Vector2(randf_range(100.0, 450.0), 0.0)
+		meteor.linear_velocity = velocity.rotated(direction)
+		
+		add_child(meteor)
+	
+	$MeteorTimer.start(randi_range(5, 8))

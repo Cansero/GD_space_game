@@ -1,18 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dod5iqwerrgb8"]
+[gd_scene load_steps=6 format=3 uid="uid://dod5iqwerrgb8"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_n13el"]
 [ext_resource type="PackedScene" uid="uid://c2gfyxmxbat15" path="res://mob.tscn" id="2_8xxq6"]
+[ext_resource type="PackedScene" uid="uid://bmyky3thcd4dk" path="res://meteor.tscn" id="3_gst05"]
 [ext_resource type="PackedScene" uid="uid://po80jswbuevv" path="res://player.tscn" id="3_l376t"]
 
 [sub_resource type="Curve2D" id="Curve2D_h4pv0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 720, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 704, 0)
 }
 point_count = 2
 
 [node name="Main" type="Node"]
 script = ExtResource("1_n13el")
 mob_scene = ExtResource("2_8xxq6")
+meteor_scene = ExtResource("3_gst05")
 
 [node name="Player" parent="." instance=ExtResource("3_l376t")]
 position = Vector2(335, 626)
@@ -24,8 +26,14 @@ position = Vector2(377, 895)
 curve = SubResource("Curve2D_h4pv0")
 
 [node name="MobLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(24, 0)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmyky3thcd4dk"]
+
+[ext_resource type="Script" path="res://Meteor.gd" id="1_jsa5c"]
+[ext_resource type="Texture2D" uid="uid://d4ng7dq10ehj4" path="res://sprites/meteor_2.png" id="2_7btwn"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_03aw8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mq0jb"]
+radius = 72.0
+height = 200.0
+
+[node name="Meteor" type="RigidBody2D" groups=["meteor", "obstacles"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_jsa5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_7btwn")
+script = ExtResource("3_03aw8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mq0jb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2gfyxmxbat15"]
+[gd_scene load_steps=5 format=3 uid="uid://c2gfyxmxbat15"]
 
 [ext_resource type="Script" path="res://mob.gd" id="1_7bpxd"]
 [ext_resource type="Texture2D" uid="uid://bc8p14qkw0mwr" path="res://sprites/enemy.png" id="1_ow60y"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_epa1y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t8lus"]
 radius = 43.0465
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" groups=["mobs", "obstacles"]]
 position = Vector2(326, 264)
 collision_mask = 0
 gravity_scale = 0.0
@@ -16,6 +17,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_ow60y")
+script = ExtResource("3_epa1y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t8lus")
