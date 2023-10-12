@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dod5iqwerrgb8"]
+[gd_scene load_steps=7 format=3 uid="uid://dod5iqwerrgb8"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_n13el"]
 [ext_resource type="PackedScene" uid="uid://c2gfyxmxbat15" path="res://mob.tscn" id="2_8xxq6"]
@@ -10,6 +10,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 704, 0)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kum0n"]
+size = Vector2(720, 20)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_n13el")
@@ -35,5 +38,13 @@ wait_time = 2.0
 wait_time = 5.0
 one_shot = true
 
+[node name="ExitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(360, 1072)
+shape = SubResource("RectangleShape2D_kum0n")
+
+[connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]

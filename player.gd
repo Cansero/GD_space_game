@@ -1,11 +1,14 @@
 extends Node2D
 
-signal hit
+signal death
 
 @export var bullet: PackedScene
 @export var base_speed = 500
 @export var brake_speed = 200
+@export var life = 3
+
 var screen_size
+var braking
 
 
 func _ready():
@@ -21,15 +24,18 @@ func _process(delta):
 	var speed = base_speed
 	var velocity = Vector2.ZERO
 	
+	if Input.is_action_pressed("bracke"):
+		$ShootDelay.set_wait_time(0.2)
+		speed = brake_speed
+	else:
+		$ShootDelay.set_wait_time(0.7)
+		speed = base_speed
+	
 	if Input.is_action_pressed("shoot"):
 		if $ShootDelay.is_stopped():
 			shoot()
 			$ShootDelay.start()
 	
-	if Input.is_action_pressed("bracke"):
-		speed = brake_speed
-	
-	# Movement
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
 	if Input.is_action_pressed("move_down"):
@@ -44,3 +50,22 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
+
+func hit(times, duration):
+	for x in range(times):
+		hide()
+		await get_tree().create_timer(duration).timeout
+		show()
+		await get_tree().create_timer(duration).timeout
+
+
+func _on_body_entered(body):
+	life -= 1
+	
+	if life:
+		hit(3, 0.2)
+	
+	elif !life:
+		hide()
+		death.emit()

@@ -7,7 +7,16 @@ extends Node
 func new_game():
 	$MobTimer.start()
 	$MeteorTimer.start()
-	
+
+
+func game_over():
+	$MobTimer.stop()
+	$MeteorTimer.stop()
+
+
+func base_hit():
+	pass
+
 
 func _ready():
 	new_game()
@@ -50,3 +59,12 @@ func _on_meteor_timer_timeout():
 		add_child(meteor)
 	
 	$MeteorTimer.start(randi_range(5, 8))
+
+
+func _on_player_death():
+	game_over()
+
+
+func _on_exit_area_body_entered(body):
+	if body.is_in_group("mobs"):
+		base_hit()
