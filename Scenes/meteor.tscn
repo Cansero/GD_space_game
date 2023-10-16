@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmyky3thcd4dk"]
 
-[ext_resource type="Script" path="res://Meteor.gd" id="1_jsa5c"]
-[ext_resource type="Texture2D" uid="uid://d4ng7dq10ehj4" path="res://sprites/meteor_2.png" id="2_7btwn"]
-[ext_resource type="Script" path="res://Sprite2D.gd" id="3_03aw8"]
+[ext_resource type="Script" path="res://Scripts/Meteor.gd" id="1_jsa5c"]
+[ext_resource type="Texture2D" uid="uid://b4xy7j35m3opm" path="res://sprites/meteor_2.png" id="2_7btwn"]
+[ext_resource type="Script" path="res://Scripts/Sprite2D.gd" id="3_03aw8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mq0jb"]
 radius = 72.0

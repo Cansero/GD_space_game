@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://po80jswbuevv"]
+[gd_scene load_steps=5 format=3 uid="uid://dnhcgh37bghhg"]
 
 [ext_resource type="Texture2D" uid="uid://n48jp8f88mqp" path="res://sprites/ship_2.png" id="1_3a52i"]
-[ext_resource type="Script" path="res://player.gd" id="1_ebbto"]
-[ext_resource type="PackedScene" uid="uid://dp78k3qhxufpm" path="res://bullet.tscn" id="2_7gj6b"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_ud7am"]
+[ext_resource type="PackedScene" uid="uid://dp78k3qhxufpm" path="res://Scenes/bullet.tscn" id="2_ifk4v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_thfti"]
 radius = 16.0
@@ -10,8 +10,8 @@ height = 78.0
 
 [node name="Player" type="Area2D"]
 position = Vector2(376, 896)
-script = ExtResource("1_ebbto")
-bullet = ExtResource("2_7gj6b")
+script = ExtResource("1_ud7am")
+bullet = ExtResource("2_ifk4v")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

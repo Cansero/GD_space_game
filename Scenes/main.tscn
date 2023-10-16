@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dod5iqwerrgb8"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_n13el"]
-[ext_resource type="PackedScene" uid="uid://c2gfyxmxbat15" path="res://mob.tscn" id="2_8xxq6"]
-[ext_resource type="PackedScene" uid="uid://bmyky3thcd4dk" path="res://meteor.tscn" id="3_gst05"]
-[ext_resource type="PackedScene" uid="uid://po80jswbuevv" path="res://player.tscn" id="3_l376t"]
-[ext_resource type="PackedScene" uid="uid://dbgne3bq5nn85" path="res://hud.tscn" id="4_xwa3t"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_ef8b4"]
+[ext_resource type="PackedScene" uid="uid://c2gfyxmxbat15" path="res://Scenes/mob.tscn" id="2_4dwjv"]
+[ext_resource type="PackedScene" uid="uid://bmyky3thcd4dk" path="res://Scenes/meteor.tscn" id="3_gst05"]
+[ext_resource type="PackedScene" uid="uid://dnhcgh37bghhg" path="res://Scenes/player.tscn" id="3_l376t"]
+[ext_resource type="PackedScene" uid="uid://dbgne3bq5nn85" path="res://Scenes/hud.tscn" id="4_xwa3t"]
 
 [sub_resource type="Curve2D" id="Curve2D_h4pv0"]
 _data = {
@@ -16,8 +16,8 @@ point_count = 2
 size = Vector2(720, 20)
 
 [node name="Main" type="Node"]
-script = ExtResource("1_n13el")
-mob_scene = ExtResource("2_8xxq6")
+script = ExtResource("1_ef8b4")
+mob_scene = ExtResource("2_4dwjv")
 meteor_scene = ExtResource("3_gst05")
 
 [node name="HUD" parent="." instance=ExtResource("4_xwa3t")]
@@ -26,7 +26,7 @@ meteor_scene = ExtResource("3_gst05")
 position = Vector2(335, 626)
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(377, 895)
+position = Vector2(360, 896)
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_h4pv0")
@@ -49,6 +49,7 @@ shape = SubResource("RectangleShape2D_kum0n")
 
 [connection signal="start_game" from="HUD" to="." method="new_game"]
 [connection signal="death" from="Player" to="." method="_on_player_death"]
+[connection signal="mob_kill" from="Player" to="." method="_on_player_mob_kill"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
 [connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]

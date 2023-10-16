@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbgne3bq5nn85"]
 
-[ext_resource type="Script" path="res://hud.gd" id="1_ac5vr"]
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ac5vr"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ac5vr")
@@ -9,7 +9,8 @@ script = ExtResource("1_ac5vr")
 offset_right = 120.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 86
-text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 7

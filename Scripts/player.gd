@@ -6,10 +6,11 @@ signal mob_kill
 @export var bullet: PackedScene
 @export var base_speed = 500
 @export var brake_speed = 200
-@export var life = 3
+@export var base_life = 3
 
 var screen_size
 var braking
+var life
 
 
 func _ready():
@@ -79,4 +80,10 @@ func show_player():
 
 
 func _on_mob_killed():
-	pass
+	mob_kill.emit()
+
+
+func start(pos):
+	position = pos
+	show()
+	life = base_life

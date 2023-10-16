@@ -4,8 +4,12 @@ extends Node
 @export var meteor_scene: PackedScene
 @export var base_life = 5
 
+var score
 
 func new_game():
+	get_tree().call_group("obstacles", "queue_free")
+	score = 0
+	$Player.start($StartPosition.position)
 	$MobTimer.start()
 	$MeteorTimer.start()
 	$Player.show_player()
@@ -57,8 +61,14 @@ func _on_meteor_timer_timeout():
 
 func _on_player_death():
 	game_over()
+	$HUD.reset()
 
 
 func _on_exit_area_body_entered(body):
 	if body.is_in_group("mobs"):
 		base_life -= 1
+
+
+func _on_player_mob_kill():
+	score += 1
+	$HUD.update_score(score)
