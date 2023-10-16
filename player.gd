@@ -1,6 +1,7 @@
 extends Node2D
 
 signal death
+signal mob_kill
 
 @export var bullet: PackedScene
 @export var base_speed = 500
@@ -13,11 +14,13 @@ var braking
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	hide()
 
 func shoot():
 	var b = bullet.instantiate()
 	owner.add_child(b)
 	b.transform = $Marker2D.global_transform
+	b.connect("mob_killed", _on_mob_killed)
 
 
 func _process(delta):
@@ -63,9 +66,17 @@ func hit(times, duration):
 func _on_body_entered(body):
 	life -= 1
 	
-	if life:
+	if life > 0:
 		hit(3, 0.2)
 	
-	elif !life:
+	else:
 		hide()
 		death.emit()
+
+
+func show_player():
+	show()
+
+
+func _on_mob_killed():
+	pass

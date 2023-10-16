@@ -2,24 +2,18 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var meteor_scene: PackedScene
+@export var base_life = 5
 
 
 func new_game():
 	$MobTimer.start()
 	$MeteorTimer.start()
+	$Player.show_player()
 
 
 func game_over():
 	$MobTimer.stop()
 	$MeteorTimer.stop()
-
-
-func base_hit():
-	pass
-
-
-func _ready():
-	new_game()
 
 
 func _on_mob_timer_timeout():
@@ -67,4 +61,4 @@ func _on_player_death():
 
 func _on_exit_area_body_entered(body):
 	if body.is_in_group("mobs"):
-		base_hit()
+		base_life -= 1
